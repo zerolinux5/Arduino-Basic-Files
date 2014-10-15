@@ -21,6 +21,8 @@ void loop()
 {
   val = analogRead(LIGHT);
   Serial.println(val);
+  
+  //digital stepping function
   if(val <= STAGE_1)
   {
     analogWrite(RLED, 255);
@@ -31,12 +33,25 @@ void loop()
     analogWrite(RLED, 127);
     analogWrite(GLED, 127);
     analogWrite(BLED, 127);
-  } else 
+  } else if( val <= STAGE_2)
+  {
+    analogWrite(RLED, 60);
+    analogWrite(GLED, 60);
+    analogWrite(BLED, 60);
+  }else 
   {
     digitalWrite(RLED, LOW);
     digitalWrite(GLED, LOW);
     digitalWrite(BLED, LOW);
   }  
+  
+  /* analog mapping values used but fade not that effective
+  val = map(val, 100, 900, 255, 0);
+  val = constrain(val, 0, 255);
+  analogWrite(RLED, val);
+  analogWrite(GLED, val);
+  analogWrite(BLED, val);
+  */
 }
     
     
