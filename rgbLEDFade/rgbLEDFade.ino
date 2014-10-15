@@ -16,6 +16,7 @@ void setup()
   Serial.begin(9600);
 }
 
+//software debouncing implementation
 boolean debounce(boolean last)
 {
   boolean current = digitalRead(BUTTON);
@@ -26,6 +27,7 @@ boolean debounce(boolean last)
   }
 }
 
+//different colors to show rgb LED spectrum
 void setMode(int mode)
 {
   switch (mode){
@@ -50,25 +52,7 @@ void setMode(int mode)
     case 4:
       analogWrite(REDLED, 127);
       analogWrite(BLUELED, 127);
-      analogWrite(GREENLED, 0);
-      Serial.println("PURPLE");
-      break;
-    case 5:
-      analogWrite(REDLED, 0);
-      analogWrite(BLUELED, 127);
       analogWrite(GREENLED, 127);
-      Serial.println("TEAL");
-      break;
-    case 6:
-      analogWrite(REDLED, 127);
-      analogWrite(BLUELED, 0);
-      analogWrite(GREENLED, 127);
-      Serial.println("ORANGE");
-      break;
-    case 7:
-      analogWrite(REDLED, 85);
-      analogWrite(BLUELED, 85);
-      analogWrite(GREENLED, 85);
       Serial.println("WHITE");
       break;
     default:
@@ -90,6 +74,6 @@ void loop()
     ledMode++;
   }
   lastButton = currentButton;
-  if(ledMode == 8) ledMode = 0;
+  if(ledMode == 5) ledMode = 0;
   setMode(ledMode);
 }
